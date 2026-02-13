@@ -29,3 +29,19 @@ curl -X POST http://localhost:5000/negotiate/offer \
 -d '{"sessionId":"SESSION_ID_HERE","offer":650}'
 
 ```
+
+
+```
+curl -X POST http://localhost:6000/pricing/validate \
+-H "Content-Type: application/json" \
+-d '{"productId":"P1","finalPrice":650}'
+
+
+
+# Test for pricing engine
+curl -X POST http://localhost:6000/pricing/validate \
+-H "Content-Type: application/json" \
+-d '{"productId":"P1","finalPrice":800}'
+
+curl http://localhost:6000/pricing/rules/P1
+```
