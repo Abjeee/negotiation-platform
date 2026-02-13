@@ -30,7 +30,7 @@ curl -X POST http://localhost:5000/negotiate/offer \
 
 ```
 
-
+# Test for pricing engine
 ```
 curl -X POST http://localhost:6000/pricing/validate \
 -H "Content-Type: application/json" \
@@ -38,10 +38,25 @@ curl -X POST http://localhost:6000/pricing/validate \
 
 
 
-# Test for pricing engine
+
 curl -X POST http://localhost:6000/pricing/validate \
 -H "Content-Type: application/json" \
 -d '{"productId":"P1","finalPrice":800}'
 
 curl http://localhost:6000/pricing/rules/P1
+```
+
+# Test for coupon service
+```
+curl -X POST http://localhost:7000/coupon/generate \
+-H "Content-Type: application/json" \
+-d '{"productId":"P1","userId":"U1","finalPrice":800}'
+
+curl -X POST http://localhost:7000/coupon/validate \
+-H "Content-Type: application/json" \
+-d '{"code":"COUPON_CODE","productId":"P1","userId":"U1"}'
+
+curl -X POST http://localhost:7000/coupon/redeem \
+-H "Content-Type: application/json" \
+-d '{"code":"COUPON_CODE"}'
 ```
